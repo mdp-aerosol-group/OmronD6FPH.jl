@@ -29,7 +29,7 @@ Initialize the sensor using the i2c bus tied to a LabJack device with handle han
 function initialize(handle; SDAP = 0, SCLP = 1)
     ret = handle.i2c(
         D6FPH_ADDRESS,
-		PyVector([CTRL_REG, START_ADDRESS]),
+        PyVector([CTRL_REG, START_ADDRESS]),
         SDAPinNum = SDAP,
         SCLPinNum = SCLP,
     )
@@ -51,21 +51,21 @@ Read the temperature from the device in degree C
 function T(handle; SDAP = 0, SCLP = 1)
     handle.i2c(
         D6FPH_ADDRESS,
-		PyVector([START_ADDRESS, 0xD0, 0x61, SERIAL_CTRL_VAL]),
+        PyVector([START_ADDRESS, 0xD0, 0x61, SERIAL_CTRL_VAL]),
         SDAPinNum = SDAP,
         SCLPinNum = SCLP,
     )
     sleep(33 / 1000)
     handle.i2c(
         D6FPH_ADDRESS,
-		PyVector([START_ADDRESS, 0xD0, 0x40, 0x18, SENS_CTRL_VAL]),
+        PyVector([START_ADDRESS, 0xD0, 0x40, 0x18, SENS_CTRL_VAL]),
         SDAPinNum = SDAP,
         SCLPinNum = SCLP,
     )
     sleep(33 / 1000)
     ret = handle.i2c(
         D6FPH_ADDRESS,
-		PyVector([BUFFER_0]),
+        PyVector([BUFFER_0]),
         NumI2CBytesToReceive = 2,
         SDAPinNum = SDAP,
         SCLPinNum = SCLP,
@@ -105,21 +105,21 @@ function dp(handle, sensor; SDAP = 0, SCLP = 1)
 
     handle.i2c(
         D6FPH_ADDRESS,
-		PyVector([START_ADDRESS, 0xD0, 0x40, 0x18, SENS_CTRL_VAL]),
+        PyVector([START_ADDRESS, 0xD0, 0x40, 0x18, SENS_CTRL_VAL]),
         SDAPinNum = SDAP,
         SCLPinNum = SCLP,
     )
     sleep(33 / 1000)
     handle.i2c(
         D6FPH_ADDRESS,
-		PyVector([START_ADDRESS, 0xD0, 0x51, SERIAL_CTRL_VAL]),
+        PyVector([START_ADDRESS, 0xD0, 0x51, SERIAL_CTRL_VAL]),
         SDAPinNum = SDAP,
         SCLPinNum = SCLP,
     )
     sleep(33 / 1000)
     ret = handle.i2c(
         D6FPH_ADDRESS,
-		PyVector([BUFFER_0]),
+        PyVector([BUFFER_0]),
         NumI2CBytesToReceive = 2,
         SDAPinNum = SDAP,
         SCLPinNum = SCLP,
