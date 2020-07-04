@@ -6,11 +6,11 @@ Author: Markus Petters (mdpetter@ncsu.edu)
 
 ## Implementation
 
-The specific implementation is for the NC State aerosok group circuit board (designed by Tim Wright), which accomodates the sensor to interface directly with Labjack device. The device is mounted on the board and powered from the 5V reference VS power on the labjack. A LP2950-33LPE3 voltage regulator converts the to 3.3V to power the device. The four cables are degined to plug into a Labjack bank (e.g. VS, GND, FIO0, FIO1)
+The specific implementation is for the NC State aerosol group circuit board (designed by Tim Wright), which accomodates the sensor to interface directly with Labjack device. The device is mounted on the board and powered from the 5V reference VS power on the labjack. A Texas Instruments LP2950-33LPE3 voltage regulator converts the 5V input to 3.3V to power the device. The four cables are degined to plug into a Labjack bank (e.g. VS, GND, FIO0, FIO1). Different banks can be used. 
 
 ![](doc/board.png)
 
-The sensore specifications are in the documentation
+The sensor specifications are in the documentation
 
 [Datasheet](doc/en-d6f_ph.pdf)
 
@@ -28,6 +28,8 @@ PyCall and a working installation of the [LabJack python library](https://labjac
 
 ## Usage
 
+The code was tested with a U3-HV and U6-PRO device. Examples for these devices are in the example folders. Note that you will need to configure the IO pins. If timers or counters are used they will block the lower FIO channels. The configIO call has subtle differences between the different LabJack Models. 
+
 ```Julia
 using OmronD6FPH, PyCall
 
@@ -41,13 +43,11 @@ handle.configIO(EnableCounter0=false, EnableCounter1=false, NumberTimersEnabled 
 isInitialized = OmronD6FPH.initialize(handle;SDAP = 2,SCLP = 3)
 
 # Read temperature in Celsius
-OmronD6FPH.T(handle;SDAP = 2, SCLP = 3)
+T = OmronD6FPH.T(handle;SDAP = 2, SCLP = 3)
 
 # read differential pressure in Pa
-OmronD6FPH.dp(handle, "0505AD3"; SDAP = 2, SCLP = 3)
+dp = OmronD6FPH.dp(handle, "0505AD3"; SDAP = 2, SCLP = 3)
 ```
-
-This is tested with a U6 pro device. Adaptation is needed to work with other LabJack devices as the i2c interface slightly differs. 
 
 ## Credits and References
 The circuit board was designed by Timothy Wright
