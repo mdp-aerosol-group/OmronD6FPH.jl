@@ -40,10 +40,10 @@ handle = u6.U6()      # open device
 handle.configIO(EnableCounter0 = false, EnableCounter1 = false, NumberTimersEnabled = 0)
 
 # Initialize device for first power up, set SDA and SCL pins
-isInitialized = OmronD6FPH.initialize(handle;SDAP = 2,SCLP = 3)
+isInitialized = OmronD6FPH.initialize(handle; SDAP = 2,SCLP = 3)
 
 # Read temperature in Celsius
-T = OmronD6FPH.T(handle;SDAP = 2, SCLP = 3)
+T = OmronD6FPH.T(handle; SDAP = 2, SCLP = 3)
 
 # read differential pressure in Pa
 dp = OmronD6FPH.dp(handle, "0505AD3"; SDAP = 2, SCLP = 3)
