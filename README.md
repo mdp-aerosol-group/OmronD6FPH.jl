@@ -37,7 +37,7 @@ u6 = pyimport("u6")   # Import Labjack
 handle = u6.U6()      # open device
 
 # Turn off counters and timers
-handle.configIO(EnableCounter0=false, EnableCounter1=false, NumberTimersEnabled = 0)
+handle.configIO(EnableCounter0 = false, EnableCounter1 = false, NumberTimersEnabled = 0)
 
 # Initialize device for first power up, set SDA and SCL pins
 isInitialized = OmronD6FPH.initialize(handle;SDAP = 2,SCLP = 3)
