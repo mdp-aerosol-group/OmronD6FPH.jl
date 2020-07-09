@@ -131,7 +131,11 @@ function dp(handle, sensor; SDAP = 0, SCLP = 1)
     else
         n = ret["I2CBytes"]
         raw = ((n[1] << 8) | n[2])
-        return (raw - 1024) * rangeMode * 2 / 60000 - rangeMode
+		if sensor == "0025AD1"
+			return (raw - 1024) * rangeMode * 2 / 60000 
+		else
+			return (raw - 1024) * rangeMode * 2 / 60000 - rangeMode/2
+		end
     end
 end
 
